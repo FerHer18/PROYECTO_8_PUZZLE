@@ -39,32 +39,36 @@ public class INICIO extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnAuto.setBackground(new java.awt.Color(79, 60, 43));
-        btnAuto.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnAuto.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
         btnAuto.setForeground(new java.awt.Color(255, 255, 255));
         btnAuto.setText("JUGAR MODO AUTOMÁTICO");
+        btnAuto.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnAuto.setBorderPainted(false);
         btnAuto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAutoActionPerformed(evt);
             }
         });
-        jPanel1.add(btnAuto, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 330, 310, 80));
+        jPanel1.add(btnAuto, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 340, 270, 80));
 
         btnManual.setBackground(new java.awt.Color(79, 60, 43));
-        btnManual.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnManual.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
         btnManual.setForeground(new java.awt.Color(255, 255, 255));
         btnManual.setText("JUGAR MODO MANUAL");
+        btnManual.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnManual.setFocusPainted(false);
+        btnManual.setOpaque(true);
         btnManual.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnManualActionPerformed(evt);
             }
         });
-        jPanel1.add(btnManual, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, 270, 80));
+        jPanel1.add(btnManual, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 340, 270, 80));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Fondo_inicio.png"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 530));
 
         menuBar.setBackground(new java.awt.Color(255, 204, 204));
-        menuBar.setForeground(new java.awt.Color(0, 0, 0));
         menuBar.setPreferredSize(new java.awt.Dimension(905, 23));
 
         jMenu1.setText("ACCIONES");

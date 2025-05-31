@@ -57,7 +57,6 @@ public class INICIO_AUTO extends javax.swing.JFrame {
         fondo1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(905, 553));
         setSize(new java.awt.Dimension(1260, 700));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -67,7 +66,7 @@ public class INICIO_AUTO extends javax.swing.JFrame {
         jLabel9.setBackground(new java.awt.Color(109, 84, 34));
         jLabel9.setFont(new java.awt.Font("Cambria", 1, 36)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setText("          BIENVENIDO A JUEGO AUTOMATICO");
+        jLabel9.setText("         BIENVENIDO A JUEGO AUTOMATICO");
         jLabel9.setOpaque(true);
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, 740, 50));
 
@@ -98,7 +97,9 @@ public class INICIO_AUTO extends javax.swing.JFrame {
         jLabel12.setText("jLabel3");
         jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 140, 160, 140));
 
-        jComboBox2.setBackground(new java.awt.Color(204, 153, 0));
+        jComboBox2.setBackground(new java.awt.Color(153, 102, 0));
+        jComboBox2.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
+        jComboBox2.setForeground(new java.awt.Color(255, 255, 255));
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "VERTICAL", "HORIZONTAL", "CARACOL", "IMPOSIBLE" }));
         jComboBox2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -143,10 +144,11 @@ public class INICIO_AUTO extends javax.swing.JFrame {
         jLabel17.setForeground(new java.awt.Color(255, 255, 255));
         jLabel17.setText("         ELIGE LA META ");
         jLabel17.setOpaque(true);
-        jPanel1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 380, 220, 30));
+        jPanel1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 380, 210, 30));
 
         jButton3.setBackground(new java.awt.Color(109, 84, 34));
         jButton3.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(255, 255, 255));
         jButton3.setText("REGRESAR");
         jButton3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -163,15 +165,20 @@ public class INICIO_AUTO extends javax.swing.JFrame {
         jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 270, -1, -1));
 
         fondo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Fondo_inicio_auto.jpg"))); // NOI18N
-        jPanel1.add(fondo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 920, 550));
+        fondo1.setMaximumSize(new java.awt.Dimension(920, 550));
+        fondo1.setMinimumSize(new java.awt.Dimension(920, 550));
+        fondo1.setName(""); // NOI18N
+        fondo1.setPreferredSize(new java.awt.Dimension(920, 550));
+        jPanel1.add(fondo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 970, 550));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 550));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 930, 550));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-
+       this.setVisible(false);
+       anterior.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
@@ -179,7 +186,7 @@ public class INICIO_AUTO extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox2ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-         String seleccion = jComboBox2.getSelectedItem().toString();
+        String seleccion = jComboBox2.getSelectedItem().toString();
         int[][] estadoInicial = {
             {1, 2, 3},
             {4, 5, 6},

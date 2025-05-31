@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.mycompany.proyecto_final_2_0;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.*;
 
 public class REPORTE_JUGADORES extends javax.swing.JFrame {
@@ -10,11 +11,26 @@ public class REPORTE_JUGADORES extends javax.swing.JFrame {
     
     public REPORTE_JUGADORES(JFrame anterior) {
         initComponents();
-        
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+        jTable1.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
+
         this.setLocationRelativeTo(null);
         this.pack();
         
         this.anterior = anterior;
+        
+        // Cambiar fuente y tamaño del contenido de la tabla
+        jTable1.setFont(new java.awt.Font("Candara", java.awt.Font.BOLD, 14));
+        // Ajustar altura de las filas para que se vea bien la fuente
+        jTable1.setRowHeight(26);
+        // Cambiar fuente y tamaño del encabezado de la tabla
+        jTable1.getTableHeader().setFont(new java.awt.Font("Candara", java.awt.Font.BOLD, 18));
+        
+        for (int i = 0; i < jTable1.getRowCount(); i++) {
+            jTable1.setValueAt(i + 1, i, 0); // Columna 0 = "No."
+        }
+        
         
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
@@ -34,15 +50,70 @@ public class REPORTE_JUGADORES extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setText("REPORTE JUGADORES");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 90, -1, -1));
-        jPanel1.add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 905, 553));
+        jLabel1.setBackground(new java.awt.Color(109, 84, 34));
+        jLabel1.setFont(new java.awt.Font("Cambria", 1, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("                          REPORTE DE JUGADORES");
+        jLabel1.setOpaque(true);
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 50, 800, -1));
+
+        jButton1.setBackground(new java.awt.Color(209, 167, 122));
+        jButton1.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("Regresar");
+        jButton1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 460, 200, 60));
+
+        jTable1.setBackground(new java.awt.Color(228, 205, 180));
+        jTable1.setFont(new java.awt.Font("Candara", 1, 14)); // NOI18N
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "No.", "JUGADOR", "PUNTAJE"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.Float.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jTable1);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 150, 560, 230));
+
+        fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/reporte-jugadores.jpg"))); // NOI18N
+        fondo.setMaximumSize(new java.awt.Dimension(920, 550));
+        fondo.setMinimumSize(new java.awt.Dimension(920, 550));
+        fondo.setPreferredSize(new java.awt.Dimension(920, 550));
+        jPanel1.add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 920, 550));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -58,10 +129,18 @@ public class REPORTE_JUGADORES extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        REPORTE_JUGADORES.this.setVisible(false);
+            anterior.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel fondo;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }

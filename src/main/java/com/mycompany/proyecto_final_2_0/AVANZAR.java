@@ -39,31 +39,41 @@ public class AVANZAR extends javax.swing.JFrame {
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(94, 69, 69));
-        jLabel3.setText("GANASTE!!!");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 40, -1, -1));
+        jLabel3.setBackground(new java.awt.Color(109, 84, 34));
+        jLabel3.setFont(new java.awt.Font("Cambria", 1, 48)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("            GANASTE!!!");
+        jLabel3.setOpaque(true);
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, 500, -1));
 
+        jButton1.setBackground(new java.awt.Color(209, 167, 122));
+        jButton1.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("SIGUIENTE NIVEL");
+        jButton1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 190, 140, 60));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 230, 180, 60));
 
+        salir.setBackground(new java.awt.Color(209, 167, 122));
+        salir.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
+        salir.setForeground(new java.awt.Color(255, 255, 255));
         salir.setText("SALIR");
+        salir.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         salir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 salirActionPerformed(evt);
             }
         });
-        jPanel1.add(salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 190, 130, 70));
+        jPanel1.add(salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 230, 180, 60));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(94, 69, 69));
         jLabel2.setText("¿Deseas seguir con el siguiente nivel?");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 120, 370, 40));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 140, 370, 40));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Fondo_avanzar.jpg"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, 370));
