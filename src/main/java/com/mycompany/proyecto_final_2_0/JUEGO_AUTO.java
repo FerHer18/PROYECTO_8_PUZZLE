@@ -8,9 +8,9 @@ import java.util.*;
 import javax.swing.Timer;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URL;
 
 public class JUEGO_AUTO extends javax.swing.JFrame {
-    private JFrame anterior;
     private String seleccion;
     private int[][] estadoInicial;
     private int[][] estadoMeta;
@@ -18,27 +18,23 @@ public class JUEGO_AUTO extends javax.swing.JFrame {
     private JPanel panelTablero;
     private Timer timer;
     private int pasoActual = 0;
+    private JButton[] botones;
+    private int blanco; 
      
     public JUEGO_AUTO(int[][] estadoInicial, int[][] estadoMeta, String seleccion) {
+        initComponents();
         this.estadoInicial = estadoInicial;
         this.estadoMeta = estadoMeta;
         this.seleccion = seleccion;
-        
-        initComponents();
-        jPanel2.setLayout(new java.awt.GridLayout(3, 3)); 
+        botones = new JButton[]{btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9};
+        jPanel2.setPreferredSize(new java.awt.Dimension(450, 450));
+        jPanel2.setLayout(new java.awt.GridLayout(3, 3));
+         
         mezclarBotones();
-        btn9.setVisible(false);
         
         this.setLocationRelativeTo(null);
         this.pack();
         
-        this.anterior = anterior;
-        
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosed(java.awt.event.WindowEvent evt) {
-                anterior.setVisible(true);
-            }
-        });
     }
 
     /**
@@ -64,15 +60,14 @@ public class JUEGO_AUTO extends javax.swing.JFrame {
         jButton20 = new javax.swing.JButton();
         fondo1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(920, 550));
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel2.setLayout(new java.awt.GridLayout(1, 0));
+        jPanel2.setLayout(new java.awt.GridLayout(3, 3));
 
         btn1.setFont(new java.awt.Font("Segoe UI Black", 0, 48)); // NOI18N
-        btn1.setText("1");
+        btn1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/1.png"))); // NOI18N
         btn1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn1ActionPerformed(evt);
@@ -81,7 +76,7 @@ public class JUEGO_AUTO extends javax.swing.JFrame {
         jPanel2.add(btn1);
 
         btn2.setFont(new java.awt.Font("Segoe UI Black", 0, 48)); // NOI18N
-        btn2.setText("2");
+        btn2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/2.png"))); // NOI18N
         btn2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn2ActionPerformed(evt);
@@ -90,7 +85,7 @@ public class JUEGO_AUTO extends javax.swing.JFrame {
         jPanel2.add(btn2);
 
         btn3.setFont(new java.awt.Font("Segoe UI Black", 0, 48)); // NOI18N
-        btn3.setText("3");
+        btn3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/3.png"))); // NOI18N
         btn3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn3ActionPerformed(evt);
@@ -99,7 +94,7 @@ public class JUEGO_AUTO extends javax.swing.JFrame {
         jPanel2.add(btn3);
 
         btn4.setFont(new java.awt.Font("Segoe UI Black", 0, 48)); // NOI18N
-        btn4.setText("4");
+        btn4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/4.png"))); // NOI18N
         btn4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn4ActionPerformed(evt);
@@ -108,7 +103,7 @@ public class JUEGO_AUTO extends javax.swing.JFrame {
         jPanel2.add(btn4);
 
         btn5.setFont(new java.awt.Font("Segoe UI Black", 0, 48)); // NOI18N
-        btn5.setText("5");
+        btn5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/5.png"))); // NOI18N
         btn5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn5ActionPerformed(evt);
@@ -117,7 +112,7 @@ public class JUEGO_AUTO extends javax.swing.JFrame {
         jPanel2.add(btn5);
 
         btn6.setFont(new java.awt.Font("Segoe UI Black", 0, 48)); // NOI18N
-        btn6.setText("6");
+        btn6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/6.png"))); // NOI18N
         btn6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn6ActionPerformed(evt);
@@ -126,7 +121,7 @@ public class JUEGO_AUTO extends javax.swing.JFrame {
         jPanel2.add(btn6);
 
         btn7.setFont(new java.awt.Font("Segoe UI Black", 0, 48)); // NOI18N
-        btn7.setText("7");
+        btn7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/7.png"))); // NOI18N
         btn7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn7ActionPerformed(evt);
@@ -135,7 +130,7 @@ public class JUEGO_AUTO extends javax.swing.JFrame {
         jPanel2.add(btn7);
 
         btn8.setFont(new java.awt.Font("Segoe UI Black", 0, 48)); // NOI18N
-        btn8.setText("8");
+        btn8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/8.png"))); // NOI18N
         btn8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn8ActionPerformed(evt);
@@ -144,7 +139,7 @@ public class JUEGO_AUTO extends javax.swing.JFrame {
         jPanel2.add(btn8);
 
         btn9.setFont(new java.awt.Font("Segoe UI Black", 0, 48)); // NOI18N
-        btn9.setText("9");
+        btn9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/0.png"))); // NOI18N
         btn9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn9ActionPerformed(evt);
@@ -152,7 +147,7 @@ public class JUEGO_AUTO extends javax.swing.JFrame {
         });
         jPanel2.add(btn9);
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 530, 430));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 450, 450));
 
         jButton19.setBackground(new java.awt.Color(94, 65, 34));
         jButton19.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
@@ -186,11 +181,11 @@ public class JUEGO_AUTO extends javax.swing.JFrame {
 
     private void btn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn1ActionPerformed
         if (!btn2.isVisible()) {
-            btn2.setText(btn1.getText());
+            btn2.setIcon(btn1.getIcon());
             btn2.setVisible(true);
             btn1.setVisible(false);
         } else if (!btn4.isVisible()) {
-            btn4.setText(btn1.getText());
+            btn4.setIcon(btn1.getIcon());
             btn4.setVisible(true);
             btn1.setVisible(false);
         }
@@ -198,15 +193,15 @@ public class JUEGO_AUTO extends javax.swing.JFrame {
 
     private void btn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn2ActionPerformed
         if (!btn1.isVisible()) {
-            btn1.setText(btn2.getText());
+            btn1.setIcon(btn2.getIcon());
             btn1.setVisible(true);
             btn2.setVisible(false);
         } else if (!btn3.isVisible()) {
-            btn3.setText(btn2.getText());
+            btn3.setIcon(btn2.getIcon());
             btn3.setVisible(true);
             btn2.setVisible(false);
         } else if (!btn5.isVisible()) {
-            btn5.setText(btn2.getText());
+            btn5.setIcon(btn2.getIcon());
             btn5.setVisible(true);
             btn2.setVisible(false);
         }
@@ -214,11 +209,11 @@ public class JUEGO_AUTO extends javax.swing.JFrame {
 
     private void btn3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn3ActionPerformed
         if (!btn2.isVisible()) {
-            btn2.setText(btn3.getText());
+            btn2.setIcon(btn3.getIcon());
             btn2.setVisible(true);
             btn3.setVisible(false);
         } else if (!btn6.isVisible()) {
-            btn6.setText(btn3.getText());
+            btn6.setIcon(btn3.getIcon());
             btn6.setVisible(true);
             btn3.setVisible(false);
         }
@@ -226,15 +221,15 @@ public class JUEGO_AUTO extends javax.swing.JFrame {
 
     private void btn4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn4ActionPerformed
         if (!btn1.isVisible()) {
-            btn1.setText(btn4.getText());
+            btn1.setIcon(btn4.getIcon());
             btn1.setVisible(true);
             btn4.setVisible(false);
         } else if (!btn5.isVisible()) {
-            btn5.setText(btn4.getText());
+            btn5.setIcon(btn4.getIcon());
             btn5.setVisible(true);
             btn4.setVisible(false);
         } else if (!btn7.isVisible()) {
-            btn7.setText(btn4.getText());
+            btn7.setIcon(btn4.getIcon());
             btn7.setVisible(true);
             btn4.setVisible(false);
         }
@@ -242,19 +237,19 @@ public class JUEGO_AUTO extends javax.swing.JFrame {
 
     private void btn5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn5ActionPerformed
         if (!btn2.isVisible()) {
-            btn2.setText(btn5.getText());
+            btn2.setIcon(btn5.getIcon());
             btn2.setVisible(true);
             btn5.setVisible(false);
         } else if (!btn4.isVisible()) {
-            btn4.setText(btn5.getText());
+            btn4.setIcon(btn5.getIcon());
             btn4.setVisible(true);
             btn5.setVisible(false);
         } else if (!btn6.isVisible()) {
-            btn6.setText(btn5.getText());
+            btn6.setIcon(btn5.getIcon());
             btn6.setVisible(true);
             btn5.setVisible(false);
         } else if (!btn8.isVisible()) {
-            btn8.setText(btn5.getText());
+            btn8.setIcon(btn5.getIcon());
             btn8.setVisible(true);
             btn5.setVisible(false);
         }
@@ -262,15 +257,15 @@ public class JUEGO_AUTO extends javax.swing.JFrame {
 
     private void btn6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn6ActionPerformed
         if (!btn3.isVisible()) {
-            btn3.setText(btn6.getText());
+            btn3.setIcon(btn6.getIcon());
             btn3.setVisible(true);
             btn6.setVisible(false);
         } else if (!btn5.isVisible()) {
-            btn5.setText(btn6.getText());
+            btn5.setIcon(btn6.getIcon());
             btn5.setVisible(true);
             btn6.setVisible(false);
         } else if (!btn9.isVisible()) {
-            btn9.setText(btn6.getText());
+            btn9.setIcon(btn6.getIcon());
             btn9.setVisible(true);
             btn6.setVisible(false);
         }
@@ -278,11 +273,11 @@ public class JUEGO_AUTO extends javax.swing.JFrame {
 
     private void btn7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn7ActionPerformed
         if (!btn4.isVisible()) {
-            btn4.setText(btn7.getText());
+            btn4.setIcon(btn7.getIcon());
             btn4.setVisible(true);
             btn7.setVisible(false);
         } else if (!btn8.isVisible()) {
-            btn8.setText(btn7.getText());
+            btn8.setIcon(btn7.getIcon());
             btn8.setVisible(true);
             btn7.setVisible(false);
         }
@@ -290,15 +285,15 @@ public class JUEGO_AUTO extends javax.swing.JFrame {
 
     private void btn8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn8ActionPerformed
         if (!btn5.isVisible()) {
-            btn5.setText(btn8.getText());
+            btn5.setIcon(btn8.getIcon());
             btn5.setVisible(true);
             btn8.setVisible(false);
         } else if (!btn7.isVisible()) {
-            btn7.setText(btn8.getText());
+            btn7.setIcon(btn8.getIcon());
             btn7.setVisible(true);
             btn8.setVisible(false);
         } else if (!btn9.isVisible()) {
-            btn9.setText(btn8.getText());
+            btn9.setIcon(btn8.getIcon());
             btn9.setVisible(true);
             btn8.setVisible(false);
         }
@@ -306,27 +301,58 @@ public class JUEGO_AUTO extends javax.swing.JFrame {
 
     private void btn9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn9ActionPerformed
         if (!btn6.isVisible()) {
-            btn6.setText(btn9.getText());
+            btn6.setIcon(btn9.getIcon());
             btn6.setVisible(true);
             btn9.setVisible(false);
         } else if (!btn8.isVisible()) {
-            btn8.setText(btn9.getText());
+            btn8.setIcon(btn9.getIcon());
             btn8.setVisible(true);
             btn9.setVisible(false);
         }
     }//GEN-LAST:event_btn9ActionPerformed
     private void mezclarBotones(){
-        String[] numeros = {"1", "2", "3", "4", "5", "6", "7", "8"};
-        java.util.List<String> lista = java.util.Arrays.asList(numeros); // Se conviente el vector a una lista para poder usar el shuffle
-        java.util.Collections.shuffle(lista); // Se mezclan los elementos de forma aleatoria 
-
-        javax.swing.JButton[] botones = {btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8}; // Arreglo de botones 
-
-        for(int i = 0; i < botones.length; i++){
-            botones[i].setText(lista.get(i)); // Se le asigna un numero aleatorio al boton
-            botones[i].setVisible(true); // Lo hace visible
+        String[] numeros = {"/1.png", "/2.png", "/3.png", "/4.png", "/5.png", "/6.png", "/7.png", "/8.png", "/0.png"};
+        for (int i = 0; i < botones.length; i++) {
+            URL ruta = getClass().getResource(numeros[i]);
+            botones[i].setIcon(new ImageIcon(ruta));
+            botones[i].setVisible(true);
+        }
+        
+        botones[8].setVisible(false); // espacio vacío
+        blanco = 8;
+        
+        for (int i = 0; i < 10; i++) {
+            moverEspacioAleatoriamente();
         }
     }
+    
+    private void moverEspacioAleatoriamente() {
+        int[][] vecinos = {
+            {1, 3},        // 0
+            {0, 2, 4},     // 1
+            {1, 5},        // 2
+            {0, 4, 6},     // 3
+            {1, 3, 5, 7},  // 4
+            {2, 4, 8},     // 5
+            {3, 7},        // 6
+            {4, 6, 8},     // 7
+            {5, 7}         // 8
+        };
+
+        int[] opciones = vecinos[blanco];
+        int destino = opciones[(int)(Math.random() * opciones.length)];
+
+        // Intercambia íconos
+        Icon temp = botones[destino].getIcon();
+        botones[destino].setIcon(botones[blanco].getIcon());
+        botones[blanco].setIcon(temp);
+
+        botones[destino].setVisible(false);
+        botones[blanco].setVisible(true);
+
+        blanco = destino;
+    }
+    
     private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
         int[][] estadoInicial = generarEstadoInicialResoluble();
         int[][] estadoFinal;
@@ -396,21 +422,27 @@ public class JUEGO_AUTO extends javax.swing.JFrame {
 
         timer.start();
         }
+    
         private void actualizarBotones(int[][] estado) {
             JButton[] botones = {btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9};
             for (int i = 0; i < 3; i++) {
                 for (int j = 0; j < 3; j++) {
                     int valor = estado[i][j];
                     int index = i * 3 + j;
+                    
+                     URL ruta = getClass().getResource("/" + valor + ".png");
+                    botones[index].setIcon(new ImageIcon(ruta));
+                    
                     if (valor == 0) {
                         botones[index].setVisible(false);
                     } else {
-                        botones[index].setText(String.valueOf(valor));
+                        //botones[index].setText(String.valueOf(valor));
                         botones[index].setVisible(true);
                     }
                 }
             }
         }
+        
         private int[][] generarEstadoInicialResoluble() {
             List<Integer> numeros = new ArrayList<>();
             for (int i = 0; i <= 8; i++) {
