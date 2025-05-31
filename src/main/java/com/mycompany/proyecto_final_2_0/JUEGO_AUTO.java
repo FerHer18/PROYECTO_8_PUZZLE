@@ -65,10 +65,11 @@ public class JUEGO_AUTO extends javax.swing.JFrame {
         fondo1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(920, 550));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel2.setLayout(new java.awt.GridLayout());
+        jPanel2.setLayout(new java.awt.GridLayout(1, 0));
 
         btn1.setFont(new java.awt.Font("Segoe UI Black", 0, 48)); // NOI18N
         btn1.setText("1");
@@ -151,33 +152,34 @@ public class JUEGO_AUTO extends javax.swing.JFrame {
         });
         jPanel2.add(btn9);
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, 810, 460));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 530, 430));
 
-        jButton19.setBackground(new java.awt.Color(204, 153, 0));
-        jButton19.setFont(new java.awt.Font("Candara", 1, 14)); // NOI18N
-        jButton19.setForeground(new java.awt.Color(0, 0, 0));
+        jButton19.setBackground(new java.awt.Color(94, 65, 34));
+        jButton19.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
+        jButton19.setForeground(new java.awt.Color(255, 255, 255));
         jButton19.setText("INICIAR JUEGO");
         jButton19.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton19ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton19, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, 170, 60));
+        getContentPane().add(jButton19, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 150, 200, 60));
 
-        jButton20.setBackground(new java.awt.Color(204, 153, 0));
-        jButton20.setFont(new java.awt.Font("Candara", 1, 14)); // NOI18N
-        jButton20.setForeground(new java.awt.Color(0, 0, 0));
+        jButton20.setBackground(new java.awt.Color(94, 65, 34));
+        jButton20.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
+        jButton20.setForeground(new java.awt.Color(255, 255, 255));
         jButton20.setText("SALIR");
         jButton20.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton20ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton20, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 30, 170, 60));
+        getContentPane().add(jButton20, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 330, 200, 60));
 
         fondo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fondo_auto.jpg"))); // NOI18N
         fondo1.setOpaque(true);
-        getContentPane().add(fondo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 910, 600));
+        fondo1.setPreferredSize(new java.awt.Dimension(920, 550));
+        getContentPane().add(fondo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 920, 550));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

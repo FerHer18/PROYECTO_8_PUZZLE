@@ -11,6 +11,7 @@ com\mycompany\proyecto_final_2_0\JUEGO_MANUAL$8.class
 com\mycompany\proyecto_final_2_0\JUEGO_AUTO$3.class
 com\mycompany\proyecto_final_2_0\NIVEL_2$4.class
 com\mycompany\proyecto_final_2_0\JUEGO_AUTO$6.class
+com\mycompany\proyecto_final_2_0\INICIO_MANUAL$3.class
 com\mycompany\proyecto_final_2_0\INICIO.class
 com\mycompany\proyecto_final_2_0\NIVEL_3$2.class
 com\mycompany\proyecto_final_2_0\NIVEL_2$7.class
@@ -47,6 +48,7 @@ com\mycompany\proyecto_final_2_0\BAB$PuzzleNode.class
 com\mycompany\proyecto_final_2_0\INICIO$1.class
 com\mycompany\proyecto_final_2_0\JUEGO_AUTO$12.class
 com\mycompany\proyecto_final_2_0\JUEGO_MANUAL$1.class
+com\mycompany\proyecto_final_2_0\REPORTE_JUGADORES$2.class
 com\mycompany\proyecto_final_2_0\JUEGO_AUTO$11.class
 com\mycompany\proyecto_final_2_0\JUEGO_MANUAL$9.class
 com\mycompany\proyecto_final_2_0\INICIO$2.class
@@ -61,6 +63,7 @@ com\mycompany\proyecto_final_2_0\NIVEL_3$6.class
 com\mycompany\proyecto_final_2_0\JUEGO_MANUAL$2.class
 com\mycompany\proyecto_final_2_0\INICIO$3.class
 com\mycompany\proyecto_final_2_0\JUEGO_AUTO$10.class
+com\mycompany\proyecto_final_2_0\REPORTE_JUGADORES$3.class
 com\mycompany\proyecto_final_2_0\INICIO_MANUAL$1.class
 com\mycompany\proyecto_final_2_0\JUEGO_MANUAL$3.class
 com\mycompany\proyecto_final_2_0\JUEGO_AUTO.class

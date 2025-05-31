@@ -32,42 +32,58 @@ public class INICIO_MANUAL extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         txtName = new javax.swing.JTextField();
         btnJugar = new javax.swing.JButton();
+        btnJugar1 = new javax.swing.JButton();
         fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel2.setBackground(new java.awt.Color(109, 84, 34));
+        jLabel2.setFont(new java.awt.Font("Cambria", 1, 36)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("                                   ¿Listo para jugar? ");
+        jLabel2.setOpaque(true);
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 830, 60));
+
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(89, 70, 49));
         jLabel1.setText("Nombre del jugador:");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 200, 210, -1));
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(89, 70, 49));
-        jLabel2.setText("¿Listo para jugar?");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 70, -1, -1));
-
-        txtName.setBackground(new java.awt.Color(255, 255, 255));
         txtName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jPanel1.add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 200, 230, -1));
 
         btnJugar.setBackground(new java.awt.Color(124, 97, 82));
-        btnJugar.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btnJugar.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
+        btnJugar.setForeground(new java.awt.Color(255, 255, 255));
         btnJugar.setText("JUGAR");
+        btnJugar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnJugar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnJugarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnJugar, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 280, 210, 110));
+        jPanel1.add(btnJugar, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 330, 230, 110));
+
+        btnJugar1.setBackground(new java.awt.Color(124, 97, 82));
+        btnJugar1.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
+        btnJugar1.setForeground(new java.awt.Color(255, 255, 255));
+        btnJugar1.setText("REPORTE DE JUGADORES");
+        btnJugar1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnJugar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnJugar1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnJugar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 330, 230, 110));
 
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Fondo_inicio_manual.jpg"))); // NOI18N
-        jPanel1.add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 910, 550));
+        jPanel1.add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 920, 550));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -95,9 +111,17 @@ public class INICIO_MANUAL extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnJugarActionPerformed
 
+    private void btnJugar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnJugar1ActionPerformed
+        // Falta agregar condición de que si el txt esta vacío muestre un mensaje 
+        REPORTE_JUGADORES obj = new REPORTE_JUGADORES(anterior);
+            obj.setVisible(true);
+            this.setVisible(false);
+    }//GEN-LAST:event_btnJugar1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnJugar;
+    private javax.swing.JButton btnJugar1;
     private javax.swing.JLabel fondo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

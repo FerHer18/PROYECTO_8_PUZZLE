@@ -134,9 +134,11 @@ public class NIVEL_3 extends javax.swing.JFrame {
         });
         jPanel2.add(btn9);
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, 450, 450));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 50, 450, 450));
 
-        jButton10.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 18)); // NOI18N
+        jButton10.setBackground(new java.awt.Color(169, 117, 61));
+        jButton10.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
+        jButton10.setForeground(new java.awt.Color(255, 255, 255));
         jButton10.setText("Reiniciar ");
         jButton10.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton10.addActionListener(new java.awt.event.ActionListener() {
@@ -144,9 +146,11 @@ public class NIVEL_3 extends javax.swing.JFrame {
                 jButton10ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 240, 120, 50));
+        jPanel1.add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 170, 200, 60));
 
-        jButton11.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 18)); // NOI18N
+        jButton11.setBackground(new java.awt.Color(169, 117, 61));
+        jButton11.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
+        jButton11.setForeground(new java.awt.Color(255, 255, 255));
         jButton11.setText("Salir");
         jButton11.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton11.addActionListener(new java.awt.event.ActionListener() {
@@ -154,20 +158,23 @@ public class NIVEL_3 extends javax.swing.JFrame {
                 jButton11ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 430, 120, 50));
+        jPanel1.add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 340, 200, 60));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Fondo_nivel3.png"))); // NOI18N
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1260, 700));
+        jLabel1.setMaximumSize(new java.awt.Dimension(920, 550));
+        jLabel1.setMinimumSize(new java.awt.Dimension(920, 550));
+        jLabel1.setPreferredSize(new java.awt.Dimension(920, 550));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 920, 550));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
