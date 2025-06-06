@@ -3,13 +3,17 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.mycompany.proyecto_final_2_0;
+import java.io.*;
+import java.util.*;
 import javax.swing.*;
 
 public class AVANZAR extends javax.swing.JFrame {
     private JFrame anterior;
     private int nivel;
+    private String nombreJugador; 
+    private int puntaje; 
     
-    public AVANZAR(JFrame anterior, int nivel) {
+    public AVANZAR(JFrame anterior, int nivel, String nombreJugador, int puntaje) {
         initComponents();
         
         this.setLocationRelativeTo(null);
@@ -17,6 +21,8 @@ public class AVANZAR extends javax.swing.JFrame {
         
         this.anterior = anterior;
         this.nivel = nivel;
+        this.nombreJugador = nombreJugador;
+        this.puntaje = puntaje;
     }
 
     /**
@@ -94,21 +100,61 @@ public class AVANZAR extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if(this.nivel == 2){
-            NIVEL_2 obj = new NIVEL_2(anterior);
+            NIVEL_2 obj = new NIVEL_2(anterior, nombreJugador, puntaje); 
             obj.setVisible(true);
             this.dispose();
         }else if(this.nivel == 3){
-            NIVEL_3 obj = new NIVEL_3(anterior);
+            NIVEL_3 obj = new NIVEL_3(anterior, nombreJugador, puntaje);
             obj.setVisible(true);
             this.dispose();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirActionPerformed
+        guardarPuntaje(nombreJugador, puntaje); 
         anterior.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_salirActionPerformed
 
+    private void guardarPuntaje(String nombre, int puntaje) {
+        File archivo = new File("jugadores.txt");
+        List<String> lineas = new ArrayList<>();
+        boolean jugadorEncontrado = false;
+
+        java.time.LocalDate fecha = java.time.LocalDate.now();
+        java.time.format.DateTimeFormatter formato = java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+        if (archivo.exists()) {
+            try (BufferedReader br = new BufferedReader(new FileReader(archivo))) {
+                String linea;
+                while ((linea = br.readLine()) != null) {
+                    String[] partes = linea.split(",");
+                    if (partes.length >= 2 && partes[0].trim().equalsIgnoreCase(nombre)) {
+                        // Reemplaza el puntaje existente por el puntaje total acumulado actual
+                        lineas.add(nombre + "," + puntaje + "," + fecha.format(formato));
+                        jugadorEncontrado = true;
+                    } else {
+                        lineas.add(linea);
+                    }
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        if (!jugadorEncontrado) {
+            lineas.add(nombre + "," + puntaje + "," + fecha.format(formato));
+        }
+
+        // Sobrescribe el archivo con la info actualizada
+        try (PrintWriter pw = new PrintWriter(new FileWriter(archivo, false))) {
+            for (String l : lineas) {
+                pw.println(l);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

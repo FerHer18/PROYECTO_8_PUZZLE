@@ -4,6 +4,10 @@
  */
 package com.mycompany.proyecto_final_2_0;
 import javax.swing.*;
+//librerias extras para limpiarArchivo
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.io.IOException;
 
 public class INICIO extends javax.swing.JFrame {
 
@@ -14,7 +18,7 @@ public class INICIO extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.pack();
-        
+        //limpiarArchivoPuntajes();    
     }
 
 
@@ -142,6 +146,14 @@ public class INICIO extends javax.swing.JFrame {
     private void menuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSalirActionPerformed
        System.exit(0);
     }//GEN-LAST:event_menuSalirActionPerformed
+    
+    /*public void limpiarArchivoPuntajes() {
+        try (PrintWriter pw = new PrintWriter("jugadores.txt")) {
+            // No escribas nada. Solo abrir con PrintWriter vacía el archivo.
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }*/
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
