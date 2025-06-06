@@ -4,9 +4,17 @@
  */
 package com.mycompany.proyecto_final_2_0;
 import javax.swing.*;
+import java.io.File;
+import java.io.FileReader;
+import java.io.BufferedReader;
+import java.io.IOException;
+
 
 public class INICIO_MANUAL extends javax.swing.JFrame {
     private JFrame anterior;
+    private String nombreJugador; 
+    private int puntaje = 0; 
+
     
     public INICIO_MANUAL(JFrame anterior) {
         initComponents();
@@ -100,24 +108,73 @@ public class INICIO_MANUAL extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnJugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnJugarActionPerformed
-        String nombre = txtName.getText().trim();
-        if(nombre.isEmpty()){
+        String nombreJugador = txtName.getText().trim();
+
+        if (nombreJugador.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Ingresa tu nombre por favor", "Error", JOptionPane.WARNING_MESSAGE);
-        }else{
-            JUEGO_MANUAL obj = new JUEGO_MANUAL(anterior);
-            obj.setVisible(true);
-            this.setVisible(false);
+            return;
         }
-        
+        int puntajeExistente = obtenerPuntaje(nombreJugador);
+        puntaje = Math.max(0, puntajeExistente);
+
+        // Ahora pasas el puntaje (ya sea 0 o el que tenía)
+        JUEGO_MANUAL obj = new JUEGO_MANUAL(anterior, nombreJugador, puntaje);
+        obj.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnJugarActionPerformed
 
     private void btnJugar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnJugar1ActionPerformed
-        // Falta agregar condición de que si el txt esta vacío muestre un mensaje 
         REPORTE_JUGADORES obj = new REPORTE_JUGADORES(anterior);
             obj.setVisible(true);
             this.setVisible(false);
     }//GEN-LAST:event_btnJugar1ActionPerformed
 
+    private boolean nombreYaExiste(String nombreJugador) {
+        File archivo = new File("jugadores.txt");
+        if (!archivo.exists()) {
+            return false;
+        }
+        try (BufferedReader br = new BufferedReader(new FileReader(archivo))) {
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                String[] partes = linea.split(",");
+                if (partes.length > 0 && partes[0].trim().equalsIgnoreCase(nombreJugador)) {
+                    return true;
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace(); 
+            JOptionPane.showMessageDialog(this, "Error al leer el archivo de usuarios.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        return false;
+    }
+    
+    private int obtenerPuntaje(String nombreJugador) {
+         File archivo = new File("jugadores.txt");
+
+        if (!archivo.exists()) {
+            return -1;
+        }
+
+        try (BufferedReader br = new BufferedReader(new FileReader(archivo))) {
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                String[] partes = linea.split(",");
+                if (partes.length >= 2 && partes[0].trim().equalsIgnoreCase(nombreJugador)) {
+                    try {
+                        return Integer.parseInt(partes[1].trim()); // solo toma el puntaje, ignora la fecha
+                    } catch (NumberFormatException e) {
+                        return 0;
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error al leer el archivo de usuarios.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+        return -1;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnJugar;

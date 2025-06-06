@@ -3,15 +3,20 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.mycompany.proyecto_final_2_0;
-import javax.swing.*;
+import java.io.*;
+import java.util.*;
 import java.net.URL;
+import javax.swing.*;
 
 public class JUEGO_MANUAL extends javax.swing.JFrame {
     private JFrame anterior;
     private JButton[] botones;
     private int blanco; 
+    private String nombreJugador; 
+    private int puntaje; 
+    private int puntajeNivel = 100;
 
-    public JUEGO_MANUAL(JFrame anterior) {
+    public JUEGO_MANUAL(JFrame anterior, String nombreJugador, int puntaje) {
         initComponents();
         botones = new JButton[]{btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9};
         jPanel2.setPreferredSize(new java.awt.Dimension(450, 450));
@@ -22,6 +27,8 @@ public class JUEGO_MANUAL extends javax.swing.JFrame {
         this.pack();
         
         this.anterior = anterior;
+        this.nombreJugador = nombreJugador; 
+        this.puntaje = puntaje; 
         
     }
 
@@ -329,11 +336,17 @@ public class JUEGO_MANUAL extends javax.swing.JFrame {
     }//GEN-LAST:event_btn7ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+       guardarPuntaje(nombreJugador, puntaje); 
         this.dispose();
         anterior.setVisible(true);
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        puntajeNivel -= 10;
+        if (puntajeNivel < 0) {
+            puntajeNivel = 0;
+        }
+        
         mezclarBotones();
     }//GEN-LAST:event_jButton10ActionPerformed
 
@@ -400,11 +413,52 @@ public class JUEGO_MANUAL extends javax.swing.JFrame {
                 return; // No ha ganado todavía
             }
         }
-
+        
         // Si llegó hasta aquí, ¡ganó!
-        AVANZAR obj = new AVANZAR(anterior,2);
+        puntaje += puntajeNivel;
+        AVANZAR obj = new AVANZAR(anterior,2 ,nombreJugador, puntaje); 
         obj.setVisible(true);
         this.dispose();
+    }
+    
+   private void guardarPuntaje(String nombre, int puntaje) {
+        File archivo = new File("jugadores.txt");
+        List<String> lineas = new ArrayList<>();
+        boolean jugadorEncontrado = false;
+
+        java.time.LocalDate fecha = java.time.LocalDate.now();
+        java.time.format.DateTimeFormatter formato = java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+        if (archivo.exists()) {
+            try (BufferedReader br = new BufferedReader(new FileReader(archivo))) {
+                String linea;
+                while ((linea = br.readLine()) != null) {
+                    String[] partes = linea.split(",");
+                    if (partes.length >= 2 && partes[0].trim().equalsIgnoreCase(nombre)) {
+                        // Reemplaza el puntaje existente por el puntaje total acumulado actual
+                        lineas.add(nombre + "," + puntaje + "," + fecha.format(formato));
+                        jugadorEncontrado = true;
+                    } else {
+                        lineas.add(linea);
+                    }
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        if (!jugadorEncontrado) {
+            lineas.add(nombre + "," + puntaje + "," + fecha.format(formato));
+        }
+
+        // Sobrescribe el archivo con la info actualizada
+        try (PrintWriter pw = new PrintWriter(new FileWriter(archivo, false))) {
+            for (String l : lineas) {
+                pw.println(l);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

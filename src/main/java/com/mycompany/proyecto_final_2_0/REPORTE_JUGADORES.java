@@ -6,6 +6,7 @@ package com.mycompany.proyecto_final_2_0;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.*;
 
+
 public class REPORTE_JUGADORES extends javax.swing.JFrame {
     private JFrame anterior;
     
@@ -17,7 +18,8 @@ public class REPORTE_JUGADORES extends javax.swing.JFrame {
 
         this.setLocationRelativeTo(null);
         this.pack();
-        
+        cargarTopJugadores(); 
+
         this.anterior = anterior;
         
         // Cambiar fuente y tamaño del contenido de la tabla
@@ -82,23 +84,23 @@ public class REPORTE_JUGADORES extends javax.swing.JFrame {
         jTable1.setFont(new java.awt.Font("Candara", 1, 14)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "No.", "JUGADOR", "PUNTAJE"
+                "No.", "JUGADOR", "PUNTAJE", "FECHA"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Float.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.Float.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -106,13 +108,11 @@ public class REPORTE_JUGADORES extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(jTable1);
+        jTable1.getAccessibleContext().setAccessibleName("tabla1");
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 150, 560, 230));
 
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/reporte-jugadores.jpg"))); // NOI18N
-        fondo.setMaximumSize(new java.awt.Dimension(920, 550));
-        fondo.setMinimumSize(new java.awt.Dimension(920, 550));
-        fondo.setPreferredSize(new java.awt.Dimension(920, 550));
         jPanel1.add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 920, 550));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -133,7 +133,53 @@ public class REPORTE_JUGADORES extends javax.swing.JFrame {
         REPORTE_JUGADORES.this.setVisible(false);
             anterior.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
+    
+    private void cargarTopJugadores() {
+        java.io.File archivo = new java.io.File("jugadores.txt");
 
+        if (!archivo.exists()) {
+            JOptionPane.showMessageDialog(this, "No hay puntajes guardados aún.", "Sin datos", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+
+        java.util.List<String[]> lista = new java.util.ArrayList<>();
+
+        try (java.io.BufferedReader br = new java.io.BufferedReader(new java.io.FileReader(archivo))) {
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                String[] partes = linea.split(",");
+                if (partes.length == 3) { // nombre, puntaje, fecha
+                    String nombre = partes[0].trim();
+                    int puntaje = Integer.parseInt(partes[1].trim());
+                    String fecha = partes[2].trim();
+                    lista.add(new String[]{nombre, String.valueOf(puntaje), fecha});
+                }
+            }
+
+            // Ordenar por puntaje descendente
+            lista.sort((a, b) -> Integer.parseInt(b[1]) - Integer.parseInt(a[1]));
+
+            // Mostrar solo los 10 primeros
+            for (int i = 0; i < Math.min(10, lista.size()); i++) {
+                jTable1.setValueAt(i + 1, i, 0); // Número
+                jTable1.setValueAt(lista.get(i)[0], i, 1); // Nombre
+                jTable1.setValueAt(Integer.parseInt(lista.get(i)[1]), i, 2); // Puntaje
+                jTable1.setValueAt(lista.get(i)[2], i, 3); // Fecha
+            }
+
+            // Obtener el renderer que usa la columna 0 (No.)
+            javax.swing.table.TableCellRenderer renderer = jTable1.getColumnModel().getColumn(0).getCellRenderer();
+
+            // Asignar ese mismo renderer a las otras columnas para que tengan la misma alineación
+            jTable1.getColumnModel().getColumn(1).setCellRenderer(renderer); // Nombre
+            jTable1.getColumnModel().getColumn(2).setCellRenderer(renderer); // Puntaje
+            jTable1.getColumnModel().getColumn(3).setCellRenderer(renderer); // Fecha
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al leer el archivo de puntajes:\n" + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel fondo;
