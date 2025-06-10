@@ -106,7 +106,7 @@ public class INICIO_AUTO extends javax.swing.JFrame {
                 jComboBox2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 430, 170, 50));
+        jPanel1.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 430, 170, 50));
 
         label5.setBackground(new java.awt.Color(255, 255, 255));
         label5.setFont(new java.awt.Font("Cambria", 1, 12)); // NOI18N
@@ -144,7 +144,7 @@ public class INICIO_AUTO extends javax.swing.JFrame {
         jLabel17.setForeground(new java.awt.Color(255, 255, 255));
         jLabel17.setText("         ELIGE LA META ");
         jLabel17.setOpaque(true);
-        jPanel1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 380, 210, 30));
+        jPanel1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 370, 210, 40));
 
         jButton3.setBackground(new java.awt.Color(109, 84, 34));
         jButton3.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N

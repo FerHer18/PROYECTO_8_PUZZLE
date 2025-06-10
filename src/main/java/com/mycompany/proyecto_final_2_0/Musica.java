@@ -31,7 +31,8 @@ public class Musica {
             System.out.println("Ups, error" + ex.getMessage());
         }
     }
-
+    
+    // Esta funcion detiene la musica al momento que se cierra la ventana principal
     public void detener() {
         if (clip != null && clip.isRunning()) {
             clip.stop();
