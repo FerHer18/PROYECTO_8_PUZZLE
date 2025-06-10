@@ -6,7 +6,7 @@ package com.mycompany.proyecto_final_2_0;
 import javax.swing.*;
 
 public class INICIO extends javax.swing.JFrame {
-
+    private Musica sonido = new Musica();
     /**
      * Creates new form INICIO
      */
@@ -14,6 +14,16 @@ public class INICIO extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.pack();
+        
+        sonido = new Musica();
+        sonido.reproducir("/sonido/musica.wav");
+        
+        this.addWindowListener(new java.awt.event.WindowAdapter() {
+        @Override
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                sonido.detener();
+            }
+        });
         
     }
 

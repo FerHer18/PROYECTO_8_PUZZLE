@@ -182,19 +182,15 @@ public class INICIO_AUTO extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "VERTICAL", "HORIZONTAL", "CARACOL", "IMPOSIBLE" }));
+       
     }//GEN-LAST:event_jComboBox2ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        String seleccion = jComboBox2.getSelectedItem().toString();
-        int[][] estadoInicial = {
-            {1, 2, 3},
-            {4, 5, 6},
-            {7, 0, 8}
-        };
-        JUEGO_AUTO juego = new JUEGO_AUTO(estadoInicial, null, seleccion);
-        juego.setVisible(true);
-        this.setVisible(false);
+    String seleccion = jComboBox2.getSelectedItem().toString();
+
+    JUEGO_AUTO juego = new JUEGO_AUTO(this, seleccion);
+    juego.setVisible(true);
+    this.setVisible(false); 
     }//GEN-LAST:event_jButton2ActionPerformed
 
 

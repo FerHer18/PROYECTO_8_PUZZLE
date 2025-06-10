@@ -106,12 +106,12 @@ public class BAB {
             }
         }
 
-        return null; // No hay solución
+        return null;
     }
 
     private List<PuzzleNode> generarHijos(PuzzleNode nodo) {
         List<PuzzleNode> hijos = new ArrayList<>();
-        int[][] dir = {{-1,0},{1,0},{0,-1},{0,1}}; // arriba, abajo, izq, der
+        int[][] dir = {{-1,0},{1,0},{0,-1},{0,1}}; 
 
         for (int[] d : dir) {
             int nuevaFila = nodo.filaCero + d[0];
@@ -126,13 +126,43 @@ public class BAB {
         }
         return hijos;
     }
-
+    
     private List<PuzzleNode> reconstruirCamino(PuzzleNode nodo) {
         List<PuzzleNode> camino = new ArrayList<>();
         while (nodo != null) {
-            camino.add(0, nodo); // Agrega al inicio
+            camino.add(0, nodo); 
             nodo = nodo.padre;
         }
         return camino;
     }
+    
+    public boolean esSoluble(int[][] estadoInicial, int[][] estadoMeta) {
+        int inversionesInicial = contarInversiones(estadoInicial);
+        int inversionesMeta = contarInversiones(estadoMeta);
+        
+        return (inversionesInicial % 2 == inversionesMeta % 2);
+    }
+    
+    private int contarInversiones(int[][] tablero) {
+        List<Integer> listaLineal = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (tablero[i][j] != 0) {
+                    listaLineal.add(tablero[i][j]);
+                }
+            }
+        }
+        
+        int inversiones = 0;
+        int n = listaLineal.size();
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = i + 1; j < n; j++) {
+                if (listaLineal.get(i) > listaLineal.get(j)) {
+                    inversiones++;
+                }
+            }
+        }
+        return inversiones;
+    }
+
 }
