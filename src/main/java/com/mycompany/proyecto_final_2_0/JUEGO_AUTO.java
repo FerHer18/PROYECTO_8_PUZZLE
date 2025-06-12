@@ -11,27 +11,22 @@ import java.awt.event.ActionListener;
 import java.net.URL;
 
 public class JUEGO_AUTO extends javax.swing.JFrame {
-    private String seleccion;
-    private int[][] estadoInicial;
-    private int[][] estadoMeta;
-    private List<BAB> caminoSolucion;  // Lista de pasos de la solución
-    private JPanel panelTablero;
-    private Timer timer;
-    private int pasoActual = 0;
-    private JButton[] botones;
-    private int blanco; 
+        private String seleccion;      
+        private JButton[] botones;      
+        private Timer temporizadorAnimacion;    
+        private int pasoAnimacionActual = 0;
+        private JFrame anterior;
      
-    public JUEGO_AUTO(int[][] estadoInicial, int[][] estadoMeta, String seleccion) {
+    public JUEGO_AUTO(JFrame anterior, String seleccion) {
         initComponents();
-        this.estadoInicial = estadoInicial;
-        this.estadoMeta = estadoMeta;
+        this.anterior=anterior;
         this.seleccion = seleccion;
         botones = new JButton[]{btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9};
         jPanel2.setPreferredSize(new java.awt.Dimension(450, 450));
         jPanel2.setLayout(new java.awt.GridLayout(3, 3));
-         
-        mezclarBotones();
         
+        mezclarBotones(); 
+         
         this.setLocationRelativeTo(null);
         this.pack();
         
@@ -310,176 +305,212 @@ public class JUEGO_AUTO extends javax.swing.JFrame {
             btn9.setVisible(false);
         }
     }//GEN-LAST:event_btn9ActionPerformed
-    private void mezclarBotones(){
-        String[] numeros = {"/1.png", "/2.png", "/3.png", "/4.png", "/5.png", "/6.png", "/7.png", "/8.png", "/0.png"};
-        for (int i = 0; i < botones.length; i++) {
-            URL ruta = getClass().getResource(numeros[i]);
-            botones[i].setIcon(new ImageIcon(ruta));
-            botones[i].setVisible(true);
-        }
-        
-        botones[8].setVisible(false); // espacio vacío
-        blanco = 8;
-        
-        for (int i = 0; i < 10; i++) {
-            moverEspacioAleatoriamente();
-        }
+    private void mezclarBotones() {
+        int[][] estadoGenerado = generarEstadoInicialResoluble();
+        actualizarBotones(estadoGenerado); 
     }
     
-    private void moverEspacioAleatoriamente() {
-        int[][] vecinos = {
-            {1, 3},        // 0
-            {0, 2, 4},     // 1
-            {1, 5},        // 2
-            {0, 4, 6},     // 3
-            {1, 3, 5, 7},  // 4
-            {2, 4, 8},     // 5
-            {3, 7},        // 6
-            {4, 6, 8},     // 7
-            {5, 7}         // 8
-        };
+    private void actualizarBotones(int[][] estado) {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                int valor = estado[i][j]; 
+                int indice = i * 3 + j; 
 
-        int[] opciones = vecinos[blanco];
-        int destino = opciones[(int)(Math.random() * opciones.length)];
-
-        // Intercambia íconos
-        Icon temp = botones[destino].getIcon();
-        botones[destino].setIcon(botones[blanco].getIcon());
-        botones[blanco].setIcon(temp);
-
-        botones[destino].setVisible(false);
-        botones[blanco].setVisible(true);
-
-        blanco = destino;
+                URL ruta = getClass().getResource("/" + valor + ".png");
+                if (ruta != null) {
+                    botones[indice].setIcon(new ImageIcon(ruta)); 
+                } else {
+                    botones[indice].setText(String.valueOf(valor));
+                    System.err.println("Ups :(, al parecer existe un error " + valor + ". Usando texto en su lugar");
+                }
+                if (valor == 0) {
+                    botones[indice].setVisible(false); 
+                } else {
+                    botones[indice].setVisible(true); 
+                }
+            }
+        }
     }
-    
     private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
-        int[][] estadoInicial = generarEstadoInicialResoluble();
-        int[][] estadoFinal;
+         if (temporizadorAnimacion != null && temporizadorAnimacion.isRunning()) {
+        temporizadorAnimacion.stop();
+    }//GEN-LAST:event_jButton19ActionPerformed
+        int[][] estadoInicialActual = obtenerEstadoActualDelTablero(); 
+        int[][] estadoMetaObjetivo; 
 
         switch (seleccion) {
-            case "Horizontal":
-            estadoFinal = new int[][] {
-                {1, 2, 3},
-                {4, 5, 6},
-                {7, 8, 0}
-            };
-            break;
-            case "Vertical":
-            estadoFinal = new int[][] {
-                {1, 4, 7},
-                {2, 5, 8},
-                {3, 6, 0}
-            };
-            break;
+            case "HORIZONTAL":
+                estadoMetaObjetivo = new int[][] {
+                    {1, 2, 3},
+                    {4, 5, 6},
+                    {7, 8, 0} 
+                };
+                break;
+            case "VERTICAL":
+                estadoMetaObjetivo = new int[][] {
+                    {1, 4, 7},
+                    {2, 5, 8},
+                    {3, 6, 0}
+                };
+                break;
             case "CARACOL":
-            estadoFinal = new int[][] {
-                {5, 6, 7},
-                {4, 1, 8},
-                {3, 2, 0}
-            };
-            break;
-            case "Imposible":
-            estadoFinal = new int[][] {
-                {1, 2, 3},
-                {4, 5, 6},
-                {8, 7, 0}
-            };
-            break;
+                estadoMetaObjetivo = new int[][] {
+                    {5, 6, 7},
+                    {4, 1, 8},
+                    {3, 2, 0} 
+                };
+                break;
+            case "IMPOSIBLE":
+                estadoMetaObjetivo = new int[][] {
+                    {1, 2, 3},
+                    {4, 5, 6},
+                    {8, 7, 0} 
+                };
+                break;
             default:
-            estadoFinal = new int[][] {
-                {1, 2, 3},
-                {4, 5, 6},
-                {7, 8, 0}
-            };
-            break;
+                estadoMetaObjetivo = new int[][] {
+                    {1, 2, 3},
+                    {4, 5, 6},
+                    {7, 8, 0}
+                };
+                break;
         }
 
-        BAB bab = new BAB();
-        List<BAB.PuzzleNode> solucion = bab.resolver(estadoInicial, estadoFinal);
+        BAB solucionadorBAB = new BAB();
+
+        boolean esSolubleHaciaMeta = solucionadorBAB.esSoluble(estadoInicialActual, estadoMetaObjetivo);
+
+        if (!seleccion.equals("IMPOSIBLE") && !esSolubleHaciaMeta) {
+            int r1 = -1, c1 = -1;
+            int r2 = -1, c2 = -1;
+        
+            for (int r = 0; r < 3; r++) {
+                for (int c = 0; c < 3; c++) {
+                    if (estadoInicialActual[r][c] != 0) {
+                        if (r1 == -1) { 
+                            r1 = r; c1 = c;
+                        } else { 
+                            r2 = r; c2 = c;
+                            break;
+                        }
+                    }
+                }
+                if (r2 != -1) break;
+            }
+
+        if (r1 != -1 && r2 != -1) {
+            int temp = estadoInicialActual[r1][c1];
+            estadoInicialActual[r1][c1] = estadoInicialActual[r2][c2];
+            estadoInicialActual[r2][c2] = temp;
+            
+            actualizarBotones(estadoInicialActual);
+            
+            esSolubleHaciaMeta = solucionadorBAB.esSoluble(estadoInicialActual, estadoMetaObjetivo);
+            
+            if (!esSolubleHaciaMeta) {
+                JOptionPane.showMessageDialog(this, "¡Ups :(, al parecer existe un error '" + seleccion + "'.Se debe trabajar en ello.", "Error Irrecuperable", JOptionPane.ERROR_MESSAGE);
+                return;
+            } else {
+                JOptionPane.showMessageDialog(this, "Reiniciado, por favor presiona INICIAR JUEGO nuevamente'" + seleccion + "'.", "Ajuste de Solvabilidad", JOptionPane.INFORMATION_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Ups, nuevamente error :(", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+    }
+        if (seleccion.equals("IMPOSIBLE")) {
+            if (esSolubleHaciaMeta) {
+                JOptionPane.showMessageDialog(this, "Error :(, al parecer elegiste el modo IMPOSIBLE", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(this, "No se puede resolver", "Puzzle Imposible", JOptionPane.INFORMATION_MESSAGE);
+            }
+            return;
+        } else {
+            if (!esSolubleHaciaMeta) { 
+                 JOptionPane.showMessageDialog(this, "Error inesperado :(", "Error Interno", JOptionPane.ERROR_MESSAGE);
+                 return;
+            }
+        }
+        List<BAB.PuzzleNode> solucion = solucionadorBAB.resolver(estadoInicialActual, estadoMetaObjetivo);
 
         if (solucion == null || solucion.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "No hay solución.");
+            JOptionPane.showMessageDialog(this, "Error en el algoritmo :(", "Error Interno", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        final int[] paso = {0};
-        Timer timer = new Timer(700, null);
-
-        timer.addActionListener(new ActionListener() {
+        pasoAnimacionActual = 0;
+    
+        temporizadorAnimacion = new Timer(700, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (paso[0] < solucion.size()) {
-                    int[][] tablero = solucion.get(paso[0]).estado;
+                if (pasoAnimacionActual < solucion.size()) {
+                    int[][] tablero = solucion.get(pasoAnimacionActual).estado;
                     actualizarBotones(tablero);
-                    paso[0]++;
+                    pasoAnimacionActual++;
                 } else {
-                    timer.stop();
-                    JOptionPane.showMessageDialog(null, "¡Super, felicidades, lo lograste :)");
+                    temporizadorAnimacion.stop();
+                    JOptionPane.showMessageDialog(null, "¡LO LOGRASTE! :)", "Puzzle Completado", JOptionPane.INFORMATION_MESSAGE);
                 }
             }
         });
-
-        timer.start();
-        }
-    
-        private void actualizarBotones(int[][] estado) {
-            JButton[] botones = {btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9};
-            for (int i = 0; i < 3; i++) {
-                for (int j = 0; j < 3; j++) {
-                    int valor = estado[i][j];
-                    int index = i * 3 + j;
-                    
-                     URL ruta = getClass().getResource("/" + valor + ".png");
-                    botones[index].setIcon(new ImageIcon(ruta));
-                    
-                    if (valor == 0) {
-                        botones[index].setVisible(false);
-                    } else {
-                        //botones[index].setText(String.valueOf(valor));
-                        botones[index].setVisible(true);
-                    }
-                }
-            }
+        temporizadorAnimacion.start();
         }
         
-        private int[][] generarEstadoInicialResoluble() {
-            List<Integer> numeros = new ArrayList<>();
-            for (int i = 0; i <= 8; i++) {
-                numeros.add(i);
-            }
-
-            int[][] estado = new int[3][3];
-            do {
-                Collections.shuffle(numeros);
-                for (int i = 0; i < 9; i++) {
-                    estado[i / 3][i % 3] = numeros.get(i);
-                }
-            } while (!esSoluble(estado));
-            return estado;
+    private int[][] generarEstadoInicialResoluble() {
+        List<Integer> numeros = new ArrayList<>();
+        for (int i = 0; i <= 8; i++) {
+            numeros.add(i);
         }
+        int[][] estado = new int[3][3];
+        BAB verificadorBAB = new BAB();
+        int[][] metaEstandar = { 
+            {1, 2, 3},
+            {4, 5, 6},
+            {7, 8, 0}
+        };
 
-        private boolean esSoluble(int[][] puzzle) {
-            int[] plano = new int[9];
-            int index = 0;
-            for (int[] fila : puzzle) {
-                for (int n : fila) {
-                    plano[index++] = n;
-                }
-            }
-
-            int inversiones = 0;
+        do {
+            Collections.shuffle(numeros);
             for (int i = 0; i < 9; i++) {
-                for (int j = i + 1; j < 9; j++) {
-                    if (plano[i] != 0 && plano[j] != 0 && plano[i] > plano[j]) {
-                        inversiones++;
-                    }
-                }
+                estado[i / 3][i % 3] = numeros.get(i);
             }
+        } while (!verificadorBAB.esSoluble(estado, metaEstandar)); 
+        return estado;
+    }
+     private int[][] obtenerEstadoActualDelTablero() {
+         int[][] estado = new int[3][3];
+         for (int i = 0; i < 9; i++) {
+             JButton boton = botones[i]; 
+             if (!boton.isVisible()) {
+                 estado[i / 3][i % 3] = 0; 
+             } else {
+                 ImageIcon icono = (ImageIcon) boton.getIcon();
+                 if (icono != null && icono.getDescription() != null) {
+                     String descripcion = icono.getDescription();
 
-            return inversiones % 2 == 0;
-    }//GEN-LAST:event_jButton19ActionPerformed
-
+                     int ultimaBarra = descripcion.lastIndexOf("/");
+                     int puntoPng = descripcion.lastIndexOf(".png");
+                     if (ultimaBarra != -1 && puntoPng != -1 && puntoPng > ultimaBarra) {
+                         try {
+                             String numStr = descripcion.substring(ultimaBarra + 1, puntoPng);
+                             estado[i / 3][i % 3] = Integer.parseInt(numStr);
+                         } catch (NumberFormatException e) {
+                             System.err.println("Error :(" + descripcion);
+                             estado[i / 3][i % 3] = -1; 
+                         }
+                     } else {
+                         System.err.println("Formato de ruta de imagen inesperado: " + descripcion);
+                         estado[i / 3][i % 3] = -1; 
+                     }
+                 } else {
+                     System.err.println("Ey, parace que el boton " + i + " no tiene una imagen valida.");
+                     estado[i / 3][i % 3] = -1; 
+                 }
+             }
+         }
+             return estado; 
+     }         
+     
     private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
         INICIO pantallaInicio = new INICIO();
         pantallaInicio.setVisible(true);
