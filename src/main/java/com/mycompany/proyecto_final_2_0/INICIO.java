@@ -10,7 +10,7 @@ import java.io.PrintWriter;
 import java.io.IOException;
 
 public class INICIO extends javax.swing.JFrame {
-
+     private MUSICA sonido = new MUSICA();
     /**
      * Creates new form INICIO
      */
@@ -18,7 +18,17 @@ public class INICIO extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.pack();
-        //limpiarArchivoPuntajes();    
+        //limpiarArchivoPuntajes();
+        
+        sonido = new MUSICA();
+        sonido.reproducir("/sonido/musica.wav");
+        
+        this.addWindowListener(new java.awt.event.WindowAdapter() {
+        @Override
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                sonido.detener();
+            }
+        });
     }
 
 
