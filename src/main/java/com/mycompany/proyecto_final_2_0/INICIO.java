@@ -18,7 +18,7 @@ public class INICIO extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.pack();
-        //limpiarArchivoPuntajes();
+        //limpiarArchivoPuntajes(); // se activa en caso de querer usar la fución para borrar reporte de jugadores
         
         sonido = new MUSICA();
         sonido.reproducir("/sonido/musica.wav");
@@ -157,6 +157,7 @@ public class INICIO extends javax.swing.JFrame {
        System.exit(0);
     }//GEN-LAST:event_menuSalirActionPerformed
     
+    //Función la cual, si se habilita, se borra, borra / limpia el reporte de jugadores por completo.
     /*public void limpiarArchivoPuntajes() {
         try (PrintWriter pw = new PrintWriter("jugadores.txt")) {
             // No escribas nada. Solo abrir con PrintWriter vacía el archivo.

@@ -12,10 +12,6 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
-/**
- *
- * @author ferna
- */
 public class MUSICA {
      private Clip clip;
     

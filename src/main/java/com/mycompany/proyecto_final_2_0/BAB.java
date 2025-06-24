@@ -11,10 +11,6 @@ import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Set;
 
-/**
- *
- * @author ferna
- */
 public class BAB {
     public static class PuzzleNode implements Comparable<PuzzleNode> {
         int[][] estado;
